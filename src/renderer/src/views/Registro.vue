@@ -1,8 +1,8 @@
 <script setup>
-import boton from '../components/boton.vue';
-import { useRouter } from 'vue-router';
+import boton from '../components/boton.vue'
+import { useRouter } from 'vue-router'
 
-const router = useRouter();
+const router = useRouter()
 </script>
 
 <template>
@@ -38,10 +38,14 @@ const router = useRouter();
         <span class="logo"></span>
       </div>
       <div class="contenedorOpciones">
-        <a class="opcionSeleccionada">Inicio de sesión</a>
-        <a>Registro</a>
+        <a>Inicio de sesión</a>
+        <a class="opcionSeleccionada">Registro</a>
       </div>
       <div class="contenedorCampos">
+        <div class="input-group">
+          <span class="material-icons iconoIzquierda">person_outline</span>
+          <input class="input" type="text" placeholder="Usuario" />
+        </div>
         <div class="input-group">
           <span class="material-icons iconoIzquierda">mail_outline</span>
           <input class="input" type="email" placeholder="Email" />
@@ -50,11 +54,16 @@ const router = useRouter();
           <span class="material-icons iconoIzquierda">lock_outline</span>
           <input class="input" type="password" placeholder="Contraseña" />
         </div>
-        <a id="passOlvidada" style="margin-bottom: 5%">¿Has olvidado tu contraseña?</a>
-        <boton texto="Iniciar sesión"></boton>
+        <div class="input-group">
+          <span class="material-icons iconoIzquierda">lock_outline</span>
+          <input class="input" type="password" placeholder="Repetir contraseña" />
+        </div>
+        <boton texto="Registrarse"></boton>
         <a style="font-size: 3.5em; color: white"
-          >¿No tienes cuenta?<a style="color: #ff5733; margin-left: 0.5em; cursor: pointer" @click="router.push('/registro')"
-            >Regístrate</a
+          >¿Ya tienes cuenta?<a
+            style="color: #ff5733; margin-left: 0.5em; cursor: pointer"
+            @click="router.push('/')"
+            >Inicio de sesión</a
           ></a
         >
       </div>
@@ -69,12 +78,5 @@ const router = useRouter();
   height: 100%;
   width: 100%;
   align-items: center;
-}
-
-#passOlvidada {
-  color: white;
-  font-size: 2.5em;
-  align-self: flex-end;
-  cursor: pointer;
 }
 </style>

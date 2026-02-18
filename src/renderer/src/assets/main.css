@@ -24,9 +24,6 @@ main {
 
 body {
   background-color: #0e0e0e;
-  background-image: url(../assets/background.svg);
-  background-size: cover;
-  background-repeat: no-repeat;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -82,9 +79,9 @@ main {
 
 .iconoIzquierda {
   position: absolute;
-  left: 1.2em;
+  left: 1.2rem;
   color: #d7d7d7;
-  font-size: 3em;
+  font-size: 3rem;
   pointer-events: none;
 }
 
@@ -96,7 +93,7 @@ main {
   color: white;
   justify-content: center;
   align-items: center;
-  font-size: 5em;
+  font-size: 5rem;
   text-align: center;
 }
 
@@ -155,7 +152,7 @@ main {
   height: 5%;
   color: white;
   justify-content: center;
-  font-size: 6em;
+  font-size: 6rem;
   font-weight: 600;
   column-gap: 5%;
 }
@@ -188,17 +185,56 @@ main {
 .input {
   width: 100%;
   height: 100%;
-  border-radius: 1.7em;
-  border: solid #ff58339d 0.1em;
+  border-radius: 1.7rem;
+  border: solid #ff58339d 0.1rem;
   background-color: rgba(0, 0, 0, 0.55);
   color: white;
-  padding-left: 3em;
-  padding-right: 1em;
+  padding-left: 3rem;
+  padding-right: 1rem;
   outline: none;
 }
 
 .input::placeholder {
   color: #d7d7d7;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   font-family: 'Poppins', sans-serif;
+}
+
+/* Contenedores generales */
+.menuLateral {
+  border-right: solid 0.7rem rgba(255, 255, 255, 0.07);
+  width: 5%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.contenedorPrincipal {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  padding-top: 5%;
+  flex-direction: column;
+  row-gap: 5%;
+}
+
+.contenedorOpcionesLateral {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 10%;
+  justify-content: center;
+  padding-top: 30%;
+  padding-bottom: 30%;;
+  row-gap: 7rem;
+}
+
+.opcionLateral {
+  font-size: 12rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }

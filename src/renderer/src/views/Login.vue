@@ -1,29 +1,29 @@
 <script setup>
-import boton from '../components/boton.vue';
-import { useRouter } from 'vue-router';
-import api from '../services/axios';
-import { ref } from 'vue';
+import boton from '../components/boton.vue'
+import { useRouter } from 'vue-router'
+import api from '../services/axios'
+import { ref } from 'vue'
 
-const router = useRouter();
-const email = ref('');
-const password = ref('');
+const router = useRouter()
+const email = ref('')
+const password = ref('')
 
 const login = async () => {
   try {
     const response = await api.post('/login', {
       correoUsuario: email.value,
       contrasenhaUsuario: password.value
-    });
-    
+    })
+
     if (response.data.token) {
-      localStorage.setItem('token', response.data.token);
-      router.push('/inicio');
+      localStorage.setItem('token', response.data.token)
+      router.push('/inicio')
     }
   } catch (error) {
-    console.error("Error en el login:", error.response?.data || error.message);
-    alert("Credenciales incorrectas");
+    console.error('Error en el login:', error.response?.data || error.message)
+    alert('Credenciales incorrectas')
   }
-};
+}
 </script>
 
 <template>
@@ -73,8 +73,10 @@ const login = async () => {
         </div>
         <a id="passOlvidada" style="margin-bottom: 5%">¿Has olvidado tu contraseña?</a>
         <boton texto="Iniciar sesión" @click="login"></boton>
-        <a style="font-size: 3.5em; color: white"
-          >¿No tienes cuenta?<a style="color: #ff5733; margin-left: 0.5em; cursor: pointer" @click="router.push('/registro')"
+        <a style="font-size: 3.5rem; color: white"
+          >¿No tienes cuenta?<a
+            style="color: #ff5733; margin-left: 0.5em; cursor: pointer"
+            @click="router.push('/registro')"
             >Regístrate</a
           ></a
         >
@@ -90,11 +92,14 @@ const login = async () => {
   height: 100%;
   width: 100%;
   align-items: center;
+  background-image: url(../assets/background.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #passOlvidada {
   color: white;
-  font-size: 2.5em;
+  font-size: 2.5rem;
   align-self: flex-end;
   cursor: pointer;
 }

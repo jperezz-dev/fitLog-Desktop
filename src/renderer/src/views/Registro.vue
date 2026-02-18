@@ -78,5 +78,8 @@ const router = useRouter()
   height: 100%;
   width: 100%;
   align-items: center;
+  background-image: url(../assets/background.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 </style>

@@ -1,29 +1,11 @@
-// Buscar solucion a iconos, me quiero rajar las venas
 <script setup>
 import boton from './boton.vue'
-import { computed } from 'vue'
 
-import iconoCrossfit from '../assets/icono-crossfit.svg'
-import iconoBodyPump from '../assets/icono-body-pump.svg'
-import iconoYoga from '../assets/icono-yoga.svg'
-import iconoSpinning from '../assets/icono-crossfit.svg'
-
-const props = defineProps(['titulo', 'fecha', 'hora'])
-
-const imagenSeleccionada = computed(() => {
-  const t = props.titulo ? props.titulo.toLowerCase() : ''
-  
-  if (t.includes('spinning')) return iconoSpinning
-  if (t.includes('body pump')) return iconoBodyPump
-  if (t.includes('yoga')) return iconoYoga
-  if (t.includes('crossfit')) return iconoCrossfit
-  return iconoBodyPump 
-})
+const props = defineProps(['titulo', 'fecha', 'hora', 'texto'])
 </script>
 
 <template>
   <div class="selector">
-    <span class="icono" :style="{ backgroundImage: `url(${imagenSeleccionada})` }"></span>
     <a>
       {{ titulo }}
     </a>
@@ -33,7 +15,7 @@ const imagenSeleccionada = computed(() => {
     <a>
       {{ hora }}
     </a>
-    <boton class="boton" texto="Reservar"></boton>
+    <boton class="boton" :texto="texto"></boton>
   </div>
 </template>
 
@@ -50,15 +32,6 @@ const imagenSeleccionada = computed(() => {
   font-size: 3rem;
   height: 7%;
   width: 85%;
-}
-
-.icono {
-  height: 100%;
-  width: 5%;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: solid 1px white;
 }
 
 .boton {

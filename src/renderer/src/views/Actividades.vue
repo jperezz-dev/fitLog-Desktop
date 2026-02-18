@@ -124,6 +124,7 @@ onMounted(() => {
     >
       <selector-reserva
         v-for="actividad in actividadesFiltradas"
+        texto="Reservar"
         :key="actividad._id"
         :titulo="actividad.titulo"
         :fecha="actividad.fecha"

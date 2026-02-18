@@ -1,7 +1,12 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import api from '../services/axios'
+import selectorReserva from '@renderer/components/selectorReserva.vue';
 
+import iconoCrossfit from '../assets/icono-crossfit.svg'
+import iconoBodyPump from '../assets/icono-body-pump.svg'
+import iconoYoga from '../assets/icono-yoga.svg'
+import iconoSpinning from '../assets/icono-spinning.svg'
 const router = useRouter()
 </script>
 
@@ -42,6 +47,9 @@ const router = useRouter()
         <span id="crossfit" class="actividadIcon"> </span>
         <a style="color: white; font-size: 3.8em; text-align: center; width: 40%">Crossfit</a>
       </div>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; height: 70%;">
+      <selector-reserva titulo="Spinning" fecha="10/02/2026" hora="17:00" :imagen="iconoSpinning"></selector-reserva>
     </div>
   </div>
 </template>

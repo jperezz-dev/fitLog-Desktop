@@ -1,8 +1,29 @@
 <script setup>
 import boton from '../components/boton.vue';
 import { useRouter } from 'vue-router';
+import api from '../services/axios';
+import { ref } from 'vue';
 
 const router = useRouter();
+const email = ref('');
+const password = ref('');
+
+const login = async () => {
+  try {
+    const response = await api.post('/login', {
+      correoUsuario: email.value,
+      contrasenhaUsuario: password.value
+    });
+    
+    if (response.data.token) {
+      localStorage.setItem('token', response.data.token);
+      router.push('/inicio');
+    }
+  } catch (error) {
+    console.error("Error en el login:", error.response?.data || error.message);
+    alert("Credenciales incorrectas");
+  }
+};
 </script>
 
 <template>
@@ -44,14 +65,14 @@ const router = useRouter();
       <div class="contenedorCampos">
         <div class="input-group">
           <span class="material-icons iconoIzquierda">mail_outline</span>
-          <input class="input" type="email" placeholder="Email" />
+          <input v-model="email" class="input" type="email" placeholder="Email" />
         </div>
         <div class="input-group">
           <span class="material-icons iconoIzquierda">lock_outline</span>
-          <input class="input" type="password" placeholder="Contraseña" />
+          <input v-model="password" class="input" type="password" placeholder="Contraseña" />
         </div>
         <a id="passOlvidada" style="margin-bottom: 5%">¿Has olvidado tu contraseña?</a>
-        <boton texto="Iniciar sesión"></boton>
+        <boton texto="Iniciar sesión" @click="login"></boton>
         <a style="font-size: 3.5em; color: white"
           >¿No tienes cuenta?<a style="color: #ff5733; margin-left: 0.5em; cursor: pointer" @click="router.push('/registro')"
             >Regístrate</a

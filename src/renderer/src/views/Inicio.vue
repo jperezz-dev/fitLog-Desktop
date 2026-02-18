@@ -70,7 +70,7 @@ const router = useRouter()
       ></card-actividad>
       <card-actividad style="height: 90%;"
         texto="Clases dirigidas de"
-        titulo="Body Pump"
+        titulo="Body pump"
         :imagen="imgBodyPump"
       ></card-actividad>
       <card-actividad

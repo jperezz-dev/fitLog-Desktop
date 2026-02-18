@@ -1,11 +1,29 @@
+// Buscar solucion a iconos, me quiero rajar las venas
 <script setup>
 import boton from './boton.vue'
-defineProps(['titulo', 'fecha', 'hora', 'imagen'])
+import { computed } from 'vue'
+
+import iconoCrossfit from '../assets/icono-crossfit.svg'
+import iconoBodyPump from '../assets/icono-body-pump.svg'
+import iconoYoga from '../assets/icono-yoga.svg'
+import iconoSpinning from '../assets/icono-crossfit.svg'
+
+const props = defineProps(['titulo', 'fecha', 'hora'])
+
+const imagenSeleccionada = computed(() => {
+  const t = props.titulo ? props.titulo.toLowerCase() : ''
+  
+  if (t.includes('spinning')) return iconoSpinning
+  if (t.includes('body pump')) return iconoBodyPump
+  if (t.includes('yoga')) return iconoYoga
+  if (t.includes('crossfit')) return iconoCrossfit
+  return iconoBodyPump 
+})
 </script>
 
 <template>
   <div class="selector">
-    <span class="icono" :style="{ backgroundImage: `url('${imagen}')` }"></span>
+    <span class="icono" :style="{ backgroundImage: `url(${imagenSeleccionada})` }"></span>
     <a>
       {{ titulo }}
     </a>
@@ -37,7 +55,7 @@ defineProps(['titulo', 'fecha', 'hora', 'imagen'])
 .icono {
   height: 100%;
   width: 5%;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   border: solid 1px white;

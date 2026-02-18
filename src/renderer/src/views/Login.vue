@@ -3,10 +3,12 @@ import boton from '../components/boton.vue'
 import { useRouter } from 'vue-router'
 import api from '../services/axios'
 import { ref } from 'vue'
+import { useUserStore } from '@renderer/services/usser_session'
 
 const router = useRouter()
 const email = ref('')
 const password = ref('')
+const userStore = useUserStore()
 
 const login = async () => {
   try {
@@ -15,8 +17,13 @@ const login = async () => {
       contrasenhaUsuario: password.value
     })
 
+    console.log('Respuesta completa del servidor:', response.data); // AÑADE ESTO
+
     if (response.data.token) {
       localStorage.setItem('token', response.data.token)
+      userStore.setUser(response.data.user)
+      console.log(response.data)
+      console.log(response.data.user)
       router.push('/inicio')
     }
   } catch (error) {

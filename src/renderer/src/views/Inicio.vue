@@ -2,12 +2,14 @@
 import { useRouter } from 'vue-router'
 import api from '../services/axios'
 import cardActividad from '@renderer/components/cardActividad.vue'
+import { useUserStore } from '@renderer/services/usser_session'
 
 import imgCrossfit from '../assets/imagen-crossfit.png'
 import imgBodyPump from '../assets/imagen-body-pump.png'
 import imgYoga from '../assets/imagen-yoga.png'
 
 const router = useRouter()
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -33,7 +35,7 @@ const router = useRouter()
   <div class="contenedorPrincipal">
     <div style="display: flex; flex-direction: row; padding-left: 3%">
       <a style="color: white; font-size: 5.5rem"
-        >Bienvenido<a style="color: #ff5733; font-size: 5.5rem; margin-left: 3rem">John Doe</a></a
+        >Bienvenido<a style="color: #ff5733; font-size: 5.5rem; margin-left: 3rem">{{ userStore.nombre }}</a></a
       >
     </div>
     <div id="contenedorStats">

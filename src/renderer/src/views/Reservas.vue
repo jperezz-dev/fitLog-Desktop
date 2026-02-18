@@ -26,13 +26,7 @@ const actividadesFiltradas = computed(() => {
 // Buscar actividades
 const obtenerActividades = async () => {
   try {
-    const ahora = new Date()
-    const response = await api.get('/usuarios/:usuarioId/reservas', {
-      params: {
-        usuarioID: userStore.id,
-        fecha: ahora
-      }
-    })
+    const response = await api.get(`/usuarios/${userStore.id}/reservasDisponibles`)
 
     if (Array.isArray(response.data)) {
       actividades.value = response.data
@@ -40,7 +34,7 @@ const obtenerActividades = async () => {
   } catch (error) {
     if (error.response && error.response.status === 404) {
       actividades.value = []
-      console.log('No se encontraron actividades reservadas.')
+      console.log('No tienes reservas.')
     } else {
       console.error('Error al cargar actividades:', error.message)
     }

@@ -81,7 +81,7 @@ main {
   position: absolute;
   left: 1.2rem;
   color: #d7d7d7;
-  font-size: 3rem;
+  font-size: 3.5rem;
   pointer-events: none;
 }
 
@@ -189,14 +189,14 @@ main {
   border: solid #ff58339d 0.1rem;
   background-color: rgba(0, 0, 0, 0.55);
   color: white;
-  padding-left: 3rem;
-  padding-right: 1rem;
+  padding-left: 6rem;
   outline: none;
+  font-size: 3.5rem;
 }
 
 .input::placeholder {
   color: #d7d7d7;
-  font-size: 1.1rem;
+  font-size: 3.5rem;
   font-family: 'Poppins', sans-serif;
 }
 

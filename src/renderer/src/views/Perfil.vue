@@ -24,9 +24,9 @@ const actividadesFiltradas = computed(() => {
 })
 
 // Buscar actividades
-const obtenerActividades = async () => {
+const obtenerHistorial = async () => {
   try {
-    const response = await api.get(`/usuarios/${userStore.id}/reservasDisponibles`)
+    const response = await api.get(`/usuarios/${userStore.id}/historial`)
 
     if (Array.isArray(response.data)) {
       actividades.value = response.data
@@ -34,19 +34,18 @@ const obtenerActividades = async () => {
   } catch (error) {
     if (error.response && error.response.status === 404) {
       actividades.value = []
-      console.log('No tienes reservas.')
     } else {
-      console.error('Error al cargar actividades:', error.message)
+      console.error('Error al cargar historial:', error.message)
     }
   }
 }
 
 watch(actividadSeleccionada, () => {
-  obtenerActividades()
+  obtenerHistorial()
 })
 
 onMounted(() => {
-  obtenerActividades()
+  obtenerHistorial()
 })
 </script>
 
@@ -79,7 +78,16 @@ onMounted(() => {
         style="display: flex; flex-direction: row; color: white; font-size: 4.5rem; column-gap: 20%"
       >
         <a>Nombre: {{ userStore.nombre }}</a>
-        <a>Miembro desde: {{ userStore.fechaCreacion }}</a>
+        <a
+          >Miembro desde:
+          {{
+            new Date(userStore.fechaCreacion).toLocaleDateString('es-ES', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+            })
+          }}</a
+        >
       </div>
       <div style="display: flex; flex-direction: row; color: white; font-size: 4.5rem">
         <a>Email: {{ userStore.correo }}</a>
@@ -96,16 +104,17 @@ onMounted(() => {
         margin-top: 3%;
       "
     >
-      <selector-reserva
+      <reservas-historico
         v-for="actividad in actividadesFiltradas"
         :key="actividad._id"
         :titulo="actividad.titulo"
         :fecha="actividad.fecha"
         :hora="actividad.hora"
-      ></selector-reserva>
+      >
+      </reservas-historico>
 
       <p v-if="actividadesFiltradas.length === 0" style="color: white; font-size: 2.5rem">
-        No tienes ninguna reserva activa.
+        No tienes ninguna reserva pasada
       </p>
     </div>
   </div>

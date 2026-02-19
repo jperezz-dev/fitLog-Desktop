@@ -41,6 +41,23 @@ const obtenerActividades = async () => {
   }
 }
 
+// Cancelar reserva
+const cancelarReserva = async (actividadId) => {
+  if (!confirm('¿Seguro que quieres cancelar esta clase?')) return
+
+  try {
+    // CAMBIO: Usar api.post para que coincida con tu backend
+    await api.post('/actividades/cancelar', {
+      actividadId: actividadId,
+      usuarioId: userStore.id
+    })
+
+    alert('Reserva cancelada correctamente')
+    obtenerActividades()
+  } catch (error) {
+    alert('Error al cancelar')
+  }
+}
 watch(actividadSeleccionada, () => {
   obtenerActividades()
 })
@@ -94,9 +111,10 @@ onMounted(() => {
         :titulo="actividad.titulo"
         :fecha="actividad.fecha"
         :hora="actividad.hora"
+        @click="cancelarReserva(actividad._id)"
       ></selector-reserva>
 
-      <p v-if="actividadesFiltradas.length === 0" style="color: white; font-size: 2rem">
+      <p v-if="actividadesFiltradas.length === 0" style="color: white; font-size: 2.5rem">
         No tienes ninguna reserva activa.
       </p>
     </div>

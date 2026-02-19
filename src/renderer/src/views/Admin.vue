@@ -148,7 +148,7 @@ onMounted(() => {
         <VueDatePicker
           v-model="time"
           time-picker
-          dark="true"
+          dark=true
           style="
             margin-top: 3.5%;
             --dp-background-color: rgba(0, 0, 0, 0.55);
@@ -171,7 +171,7 @@ onMounted(() => {
           v-model="date"
           :time-config="{ enableTimePicker: false }"
           format="dd/MM/yyyy"
-          dark="true"
+          dark=true
           style="
             margin-top: 3.5%;
             --dp-background-color: rgba(0, 0, 0, 0.55);

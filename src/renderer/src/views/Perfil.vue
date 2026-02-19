@@ -104,7 +104,7 @@ onMounted(() => {
         :hora="actividad.hora"
       ></selector-reserva>
 
-      <p v-if="actividadesFiltradas.length === 0" style="color: white; font-size: 2rem">
+      <p v-if="actividadesFiltradas.length === 0" style="color: white; font-size: 2.5rem">
         No tienes ninguna reserva activa.
       </p>
     </div>

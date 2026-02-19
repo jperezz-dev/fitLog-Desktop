@@ -1,5 +1,4 @@
 // Arreglar seleccion fecha y seleccion hora (Tamaño botones, contenedor y texto)
-// Añadir envio de actividades creadas y cargado de actividades desde la base de datos
 <script setup>
 import { useRouter } from 'vue-router'
 import api from '../services/axios'
@@ -8,15 +7,81 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import boton from '@renderer/components/boton.vue'
 import { ref, computed, onMounted, watch } from 'vue'
 import { useUserStore } from '@renderer/services/usser_session'
+import reservaAdmin from '@renderer/components/reservaAdmin.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
+const actividades = ref([])
 const date = ref(new Date())
 const time = ref({
   hours: new Date().getHours(),
   minutes: new Date().getMinutes()
 })
 const tipoSeleccionado = ref('Clases dirigidas de Crossfit')
+const tipoLimpio = ref('Crossfit')
+
+// Lista de actividades filtradas
+const actividadesFiltradas = computed(() => {
+  return actividades.value.map((act) => {
+    const dt = new Date(act.fechaHora)
+    return {
+      ...act,
+      titulo: act.tipoActividad,
+      fecha: `${dt.getDate()}/${dt.getMonth() + 1}/${dt.getFullYear()}`,
+      hora: `${dt.getHours()}:${dt.getMinutes().toString().padStart(2, '0')}`
+    }
+  })
+})
+
+// Buscar actividades
+const obtenerActividades = async () => {
+  try {
+    const response = await api.get('/actividades/disponiblesTodo', {})
+
+    if (Array.isArray(response.data)) {
+      actividades.value = response.data
+    }
+  } catch (error) {
+    if (error.response && error.response.status === 404) {
+      actividades.value = []
+      console.log('No se encontraron actividades próximas.')
+    } else {
+      console.error('Error al cargar actividades:', error.message)
+    }
+  }
+}
+
+// Guardar actividades
+const crearActividad = async () => {
+  try {
+    // Combinar fecha y hora
+    const fechaFinal = new Date(date.value)
+    fechaFinal.setHours(time.value.hours)
+    fechaFinal.setMinutes(time.value.minutes)
+
+    await api.post('/actividades', {
+      tipoActividad: tipoLimpio.value,
+      fechaHora: fechaFinal,
+      plazasMaximas: 20
+    })
+
+    alert('Actividad creada con éxito')
+    obtenerActividades() // Recargar lista de actividades al añadir
+  } catch (error) {
+    alert('Error al crear la actividad')
+  }
+}
+
+watch(tipoSeleccionado, (nuevoValor) => {
+  if (nuevoValor.includes('Yoga')) tipoLimpio.value = 'Yoga'
+  else if (nuevoValor.includes('Spinning')) tipoLimpio.value = 'Spinning'
+  else if (nuevoValor.includes('Body Pump')) tipoLimpio.value = 'Body pump'
+  else if (nuevoValor.includes('Crossfit')) tipoLimpio.value = 'Crossfit'
+})
+
+onMounted(() => {
+  obtenerActividades()
+})
 </script>
 
 <template>
@@ -118,6 +183,7 @@ const tipoSeleccionado = ref('Clases dirigidas de Crossfit')
       <boton
         texto="Guardar actividad"
         style="width: 12%; height: 100%; font-size: 3.5rem; padding: 0rem"
+        @click="crearActividad"
       ></boton>
     </div>
     <a style="color: white; font-size: 5.5rem; padding-left: 3%; margin-top: -7rem"
@@ -132,9 +198,20 @@ const tipoSeleccionado = ref('Clases dirigidas de Crossfit')
         height: 45%;
         width: 95%;
         row-gap: 3%;
-        border: solid 1px white;
       "
-    ></div>
+    >
+      <reserva-admin
+        v-for="actividad in actividadesFiltradas"
+        :key="actividad._id"
+        :titulo="actividad.titulo"
+        :fecha="actividad.fecha"
+        :hora="actividad.hora"
+      ></reserva-admin>
+
+      <p v-if="actividadesFiltradas.length === 0" style="color: white; font-size: 2rem">
+        No hay horarios disponibles.
+      </p>
+    </div>
   </div>
 </template>
 

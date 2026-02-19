@@ -1,21 +1,59 @@
 <script setup>
-const props = defineProps(['titulo', 'fecha', 'hora'])
+const props = defineProps(['id', 'titulo', 'fecha', 'hora'])
+const emit = defineEmits(['eliminar'])
+
+const solicitarEliminacion = () => {
+  emit('eliminar', props.id)
+}
 </script>
 
 <template>
   <div class="selector">
-    <a style="height: 100%; width: 10%; justify-content: center; align-items: center; display:flex; justify-content: center; text-align: center;">
+    <a
+      style="
+        height: 100%;
+        width: 10%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      "
+    >
       {{ titulo }}
     </a>
-    <a style="height: 100%; width: 10%; justify-content: center; align-items: center; display:flex; justify-content: center; text-align: center;">
+    <a
+      style="
+        height: 100%;
+        width: 10%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      "
+    >
       {{ fecha }}
     </a>
-    <a style="height: 100%; width: 10%; justify-content: center; align-items: center; display:flex; justify-content: center; text-align: center;">
+    <a
+      style="
+        height: 100%;
+        width: 10%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      "
+    >
       {{ hora }}
     </a>
-    <div class="contenedorOpciones" style="height: 100%; width: 10%; justify-content: center; align-items: center;">
-        <span class="material-symbols-outlined botonAdmin">edit</span>
-        <span class="material-symbols-outlined botonAdmin">delete</span>
+    <div
+      class="contenedorOpciones"
+      style="height: 100%; width: 10%; justify-content: center; align-items: center"
+    >
+      <span class="material-symbols-outlined botonAdmin">edit</span>
+      <span class="material-symbols-outlined botonAdmin" @click="solicitarEliminacion">delete</span>
     </div>
   </div>
 </template>
@@ -35,7 +73,7 @@ const props = defineProps(['titulo', 'fecha', 'hora'])
   width: 85%;
 }
 
-.botonAdmin{
+.botonAdmin {
   color: #ff5833c2;
   cursor: pointer;
 }

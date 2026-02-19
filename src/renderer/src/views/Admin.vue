@@ -72,6 +72,19 @@ const crearActividad = async () => {
   }
 }
 
+// Eliminar actividad
+const eliminarActividad = async (id) => {
+  if (!confirm('¿Seguro que quieres borrar esta actividad para siempre?')) return
+
+  try {
+    await api.delete(`/actividades/${id}`)
+    alert('Actividad eliminada')
+    obtenerActividades()
+  } catch (error) {
+    alert('Error al eliminar la actividad')
+  }
+}
+
 watch(tipoSeleccionado, (nuevoValor) => {
   if (nuevoValor.includes('Yoga')) tipoLimpio.value = 'Yoga'
   else if (nuevoValor.includes('Spinning')) tipoLimpio.value = 'Spinning'
@@ -203,9 +216,11 @@ onMounted(() => {
       <reserva-admin
         v-for="actividad in actividadesFiltradas"
         :key="actividad._id"
+        :id="actividad._id"
         :titulo="actividad.titulo"
         :fecha="actividad.fecha"
         :hora="actividad.hora"
+        @eliminar="eliminarActividad"
       ></reserva-admin>
 
       <p v-if="actividadesFiltradas.length === 0" style="color: white; font-size: 2rem">

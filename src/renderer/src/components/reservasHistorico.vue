@@ -5,13 +5,13 @@ const props = defineProps(['titulo', 'fecha', 'hora'])
 
 <template>
   <div class="selector">
-    <a>
+    <a style="height: 100%; width: 10%; justify-content: center; align-items: center; display:flex; justify-content: center; text-align: center;">
       {{ titulo }}
     </a>
-    <a>
+    <a style="height: 100%; width: 10%; justify-content: center; align-items: center; display:flex; justify-content: center; text-align: center;">
       {{ fecha }}
     </a>
-    <a>
+    <a style="height: 100%; width: 10%; justify-content: center; align-items: center; display:flex; justify-content: center; text-align: center;">
       {{ hora }}
     </a>
   </div>

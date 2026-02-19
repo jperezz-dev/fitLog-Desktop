@@ -3,10 +3,12 @@ import { useRouter } from 'vue-router'
 import api from '../services/axios'
 import selectorReserva from '@renderer/components/selectorReserva.vue'
 import { ref, computed, onMounted, watch } from 'vue'
+import { useUserStore } from '@renderer/services/usser_session'
 
 const router = useRouter()
 const actividadSeleccionada = ref('Spinning')
 const actividades = ref([])
+const userStore = useUserStore()
 
 // Lista de actividades filtradas
 const actividadesFiltradas = computed(() => {
@@ -40,6 +42,23 @@ const obtenerActividades = async () => {
     } else {
       console.error('Error al cargar actividades:', error.message)
     }
+  }
+}
+
+// Reservar actividad:
+const reservarActividad = async (idActividad) => {
+  try {
+    const response = await api.post('/actividades/reservar', {
+      actividadId: idActividad,
+      usuarioId: userStore.id
+    })
+
+    alert(response.data.message)
+    obtenerActividades()
+  } catch (error) {
+  
+    const mensaje = error.response?.data?.message || 'Error al conectar con el servidor'
+    alert(mensaje)
   }
 }
 
@@ -129,6 +148,7 @@ onMounted(() => {
         :titulo="actividad.titulo"
         :fecha="actividad.fecha"
         :hora="actividad.hora"
+        @click="reservarActividad(actividad._id)"
       ></selector-reserva>
 
       <p v-if="actividadesFiltradas.length === 0" style="color: white; font-size: 2rem">

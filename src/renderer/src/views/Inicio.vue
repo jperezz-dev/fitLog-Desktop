@@ -1,3 +1,4 @@
+// Añadir estadísticas funcionales y calculo
 <script setup>
 import { useRouter } from 'vue-router'
 import api from '../services/axios'

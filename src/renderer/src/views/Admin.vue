@@ -135,6 +135,8 @@ onMounted(() => {
             color: white;
             margin-top: 3%;
             padding-left: 2%;
+            box-shadow: 0 0 7px 1px #ff58334e;
+            border-radius: 3rem;
           "
         >
           <option>Clases dirigidas de Crossfit</option>
@@ -161,6 +163,10 @@ onMounted(() => {
             --dp-icon-color: white;
             --dp-text-color: white;
             --dp-input-padding: 3.3rem 2rem 3rem 3rem;
+            --dp-preview-font-size: 3rem;
+            --dp-time-font-size: 4rem;
+            box-shadow: 0 0 7px 1px #ff58334e;
+            border-radius: 3rem;
           "
         >
         </VueDatePicker>
@@ -182,10 +188,13 @@ onMounted(() => {
             --dp-border-radius: 3rem;
             --dp-cell-border-radius: 0.1rem;
             --dp-font-size: 2.5rem;
+            --dp-preview-font-size: 3rem;
             --dp-cell-size: 8rem;
             --dp-icon-color: white;
             --dp-text-color: white;
             --dp-input-padding: 3.3rem 2rem 3rem 3rem;
+            box-shadow: 0 0 7px 1px #ff58334e;
+            border-radius: 3rem;
           "
         >
         </VueDatePicker>

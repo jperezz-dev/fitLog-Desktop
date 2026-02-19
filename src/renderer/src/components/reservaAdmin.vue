@@ -71,6 +71,7 @@ const solicitarEliminacion = () => {
   font-size: 3rem;
   height: 7%;
   width: 85%;
+  box-shadow: 0 0 7px 1px #ff58334e;
 }
 
 .botonAdmin {

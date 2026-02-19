@@ -23,6 +23,8 @@ defineProps(['texto', 'titulo', 'imagen'])
     border-radius: 2.5rem;
     background-size: cover;
     background-position: center;
+    box-shadow: 0 0 7px 1px #ff58334e;
+
 }
 
 .overlay {

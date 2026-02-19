@@ -111,6 +111,7 @@ const userStore = useUserStore()
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 10px 2px  #ff58334e;
 }
 
 .statIcon {

@@ -1,9 +1,13 @@
 <script setup>
 const props = defineProps(['id', 'titulo', 'fecha', 'hora'])
-const emit = defineEmits(['eliminar'])
+const emit = defineEmits(['eliminar', 'editar'])
 
 const solicitarEliminacion = () => {
   emit('eliminar', props.id)
+}
+
+const solicitarEdicion = () => {
+  emit('editar', props.id)
 }
 </script>
 
@@ -52,7 +56,7 @@ const solicitarEliminacion = () => {
       class="contenedorOpciones"
       style="height: 100%; width: 10%; justify-content: center; align-items: center"
     >
-      <span class="material-symbols-outlined botonAdmin">edit</span>
+      <span class="material-symbols-outlined botonAdmin" @click="solicitarEdicion">edit</span>
       <span class="material-symbols-outlined botonAdmin" @click="solicitarEliminacion">delete</span>
     </div>
   </div>

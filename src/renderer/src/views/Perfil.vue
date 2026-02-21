@@ -52,7 +52,7 @@ onMounted(() => {
 <template>
   <div class="menuLateral">
     <div class="contenedorOpcionesLateral">
-      <span class="material-symbols-outlined opcionLateral" @click="router.push('/')">home</span>
+      <span class="material-symbols-outlined opcionLateral" @click="router.push('/inicio')">home</span>
       <span class="material-symbols-outlined opcionLateral" @click="router.push('/actividades')"
         >backup_table</span
       >

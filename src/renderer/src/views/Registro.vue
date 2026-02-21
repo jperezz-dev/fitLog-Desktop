@@ -68,19 +68,19 @@ const registro = async () => {
       </div>
       <div class="contenedorCampos">
         <div class="input-group">
-          <span class="material-icons iconoIzquierda">person_outline</span>
+          <span class="material-symbols-outlined iconoIzquierda">person_outline</span>
           <input v-model="usuario" class="input" type="text" placeholder="Usuario" />
         </div>
         <div class="input-group">
-          <span class="material-icons iconoIzquierda">mail_outline</span>
+          <span class="material-symbols-outlined iconoIzquierda">mail_outline</span>
           <input v-model="email" class="input" type="email" placeholder="Email" />
         </div>
         <div class="input-group">
-          <span class="material-icons iconoIzquierda">lock_outline</span>
+          <span class="material-symbols-outlined iconoIzquierda">lock_outline</span>
           <input v-model="password" class="input" type="password" placeholder="Contraseña" />
         </div>
         <div class="input-group">
-          <span class="material-icons iconoIzquierda">lock_outline</span>
+          <span class="material-symbols-outlined iconoIzquierda">lock_outline</span>
           <input v-model="passwordRepetir" class="input" type="password" placeholder="Repetir contraseña" />
         </div>
         <boton texto="Registrarse" @click="registro"></boton>

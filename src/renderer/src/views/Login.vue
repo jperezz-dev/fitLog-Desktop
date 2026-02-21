@@ -71,11 +71,11 @@ const login = async () => {
       </div>
       <div class="contenedorCampos">
         <div class="input-group">
-          <span class="material-icons iconoIzquierda">mail_outline</span>
+          <span class="material-symbols-outlined iconoIzquierda">mail_outline</span>
           <input v-model="email" class="input" type="email" placeholder="Email" />
         </div>
         <div class="input-group">
-          <span class="material-icons iconoIzquierda">lock_outline</span>
+          <span class="material-symbols-outlined iconoIzquierda">lock_outline</span>
           <input v-model="password" class="input" type="password" placeholder="Contraseña" />
         </div>
         <a id="passOlvidada" style="margin-bottom: 5%">¿Has olvidado tu contraseña?</a>

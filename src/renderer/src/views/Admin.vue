@@ -20,6 +20,9 @@ const time = ref({
 const tipoSeleccionado = ref('Clases dirigidas de Crossfit')
 const tipoLimpio = ref('Crossfit')
 const mostrarModal = ref(false)
+const nuevaHora = ref('')
+const nuevaFecha = ref('')
+const idActividadAEditar = ref(null)
 
 // Lista de actividades filtradas
 const actividadesFiltradas = computed(() => {
@@ -86,19 +89,55 @@ const eliminarActividad = async (id) => {
   }
 }
 
+// Editar actividad
+const editarActividad = async () => {
+  try {
+    const fechaBase = new Date(nuevaFecha.value)
+
+    if (nuevaHora.value && typeof nuevaHora.value === 'object') {
+      fechaBase.setHours(nuevaHora.value.hours)
+      fechaBase.setMinutes(nuevaHora.value.minutes)
+    }
+
+    const response = await api.put(`/actividades/${idActividadAEditar.value._id}`, {
+      tipoActividad: idActividadAEditar.value.tipoActividad,
+      fechaHora: fechaBase
+    })
+
+    if (response.status === 200) {
+      alert('Actividad actualizada con éxito')
+      await obtenerActividades()
+      cerrarModalEdicion()
+    }
+  } catch (error) {
+    console.error('Error detallado:', error)
+    alert('Error al guardar los cambios')
+  }
+}
+
 // Controles modal
 const abrirModalEdicion = (id) => {
-  mostrarModal.value = true
+  const actividad = actividades.value.find((a) => a._id === id)
+  if (actividad) {
+    idActividadAEditar.value = actividad
+    const dt = new Date(actividad.fechaHora)
+
+    nuevaFecha.value = dt.toISOString().split('T')[0]
+    nuevaHora.value = `${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}`
+
+    mostrarModal.value = true
+  }
 }
 
 const cerrarModalEdicion = () => {
   mostrarModal.value = false
+  idActividadAEditar.value = null
 }
 
 watch(tipoSeleccionado, (nuevoValor) => {
   if (nuevoValor.includes('Yoga')) tipoLimpio.value = 'Yoga'
   else if (nuevoValor.includes('Spinning')) tipoLimpio.value = 'Spinning'
-  else if (nuevoValor.includes('Body Pump')) tipoLimpio.value = 'Body pump'
+  else if (nuevoValor.includes('Body pump')) tipoLimpio.value = 'Body pump'
   else if (nuevoValor.includes('Crossfit')) tipoLimpio.value = 'Crossfit'
 })
 
@@ -126,19 +165,88 @@ onMounted(() => {
         >
       </div>
       <div style="display: flex; flex-direction: column; width: 100%; height: 90%">
-        <a></a>
-        <!-- Tipo actividad-->
-        <a style="color: white; font-size: 5rem; margin-left: 10rem">Hora de la actividad:</a>
-        <!-- Selector hora -->
-        <a style="color: white; font-size: 5rem; margin-left: 10rem">Fecha de la actividad:</a>
-        <!-- Selector fecha -->
-        <!-- Botón guardado -->
+        <a style="color: #ff5833; font-size: 6rem; margin-left: 10rem">
+          Editar {{ idActividadAEditar?.tipoActividad }}
+        </a>
+        <a
+          style="
+            color: white;
+            font-size: 5rem;
+            margin-left: 10rem;
+            margin-top: 7rem;
+            margin-bottom: 2rem;
+          "
+          >Hora de la actividad:</a
+        >
+        <VueDatePicker
+          v-model="nuevaHora"
+          time-picker
+          dark="true"
+          style="
+            width: 50%;
+            margin-left: 10rem;
+            --dp-background-color: rgba(0, 0, 0, 0.55);
+            --dp-border-color: #ff58339d;
+            --dp-menu-border-color: #ff58339d;
+            --dp-font-family: 'Poppins', sans-serif;
+            --dp-border-radius: 3rem;
+            --dp-cell-border-radius: 0.1rem;
+            --dp-font-size: 2.5rem;
+            --dp-icon-color: white;
+            --dp-text-color: white;
+            --dp-input-padding: 3.3rem 2rem 3rem 3rem;
+            --dp-preview-font-size: 3rem;
+            --dp-time-font-size: 4rem;
+            box-shadow: 0 0 7px 1px #ff58334e;
+            border-radius: 3rem;
+          "
+        >
+        </VueDatePicker>
+        <a
+          style="
+            color: white;
+            font-size: 5rem;
+            margin-left: 10rem;
+            margin-top: 7rem;
+            margin-bottom: 2rem;
+          "
+          >Fecha de la actividad:</a
+        >
+        <VueDatePicker
+          v-model="nuevaFecha"
+          :time-config="{ enableTimePicker: false }"
+          :format="'dd/MM/yyyy'"
+          :preview-format="'dd/MM/yyyy'"
+          dark="true"
+          style="
+            width: 50%;
+            margin-left: 10rem;
+            --dp-background-color: rgba(0, 0, 0, 0.55);
+            --dp-border-color: #ff58339d;
+            --dp-menu-border-color: #ff58339d;
+            --dp-font-family: 'Poppins', sans-serif;
+            --dp-border-radius: 3rem;
+            --dp-cell-border-radius: 0.1rem;
+            --dp-font-size: 2.5rem;
+            --dp-preview-font-size: 3rem;
+            --dp-cell-size: 8rem;
+            --dp-icon-color: white;
+            --dp-text-color: white;
+            --dp-input-padding: 3.3rem 2rem 3rem 3rem;
+            box-shadow: 0 0 7px 1px #ff58334e;
+            border-radius: 3rem;
+          "
+        >
+        </VueDatePicker>
+        <button @click="editarActividad" class="botonGuardar">Guardar</button>
       </div>
     </div>
   </div>
   <div class="menuLateral">
     <div class="contenedorOpcionesLateral">
-      <span class="material-symbols-outlined opcionLateral" @click="router.push('/')">home</span>
+      <span class="material-symbols-outlined opcionLateral" @click="router.push('/inicio')"
+        >home</span
+      >
       <span class="material-symbols-outlined opcionLateral" @click="router.push('/actividades')"
         >backup_table</span
       >
@@ -164,6 +272,7 @@ onMounted(() => {
       <div style="display: flex; flex-direction: column; width: 30%">
         <a style="color: white; font-size: 4rem">Tipo de actividad:</a>
         <select
+          v-model="tipoSeleccionado"
           style="
             border: solid 0.2rem #ff5733;
             height: 33%;
@@ -178,7 +287,7 @@ onMounted(() => {
           "
         >
           <option>Clases dirigidas de Crossfit</option>
-          <option>Clases dirigidas de Body Pump</option>
+          <option>Clases dirigidas de Body pump</option>
           <option>Clases de iniciación al Yoga</option>
           <option>Clases guiadas de Spinning</option>
         </select>
@@ -319,5 +428,29 @@ onMounted(() => {
 .oculto {
   display: none;
   visibility: hidden;
+}
+
+.inputAdmin {
+  background: #1e1e1e;
+  color: white;
+  border: 2px solid #ff58339d;
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  font-size: 3rem;
+  width: 60%;
+  margin-left: 10rem;
+}
+
+.botonGuardar {
+  background-color: #ff5833;
+  color: white;
+  font-size: 4rem;
+  border: none;
+  border-radius: 4rem;
+  padding: 3rem;
+  width: 30%;
+  align-self: center;
+  margin-top: 10rem;
+  cursor: pointer;
 }
 </style>

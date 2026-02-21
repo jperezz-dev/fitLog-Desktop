@@ -19,6 +19,7 @@ const time = ref({
 })
 const tipoSeleccionado = ref('Clases dirigidas de Crossfit')
 const tipoLimpio = ref('Crossfit')
+const mostrarModal = ref(false)
 
 // Lista de actividades filtradas
 const actividadesFiltradas = computed(() => {
@@ -85,6 +86,15 @@ const eliminarActividad = async (id) => {
   }
 }
 
+// Controles modal
+const abrirModalEdicion = (id) => {
+  mostrarModal.value = true
+}
+
+const cerrarModalEdicion = () => {
+  mostrarModal.value = false
+}
+
 watch(tipoSeleccionado, (nuevoValor) => {
   if (nuevoValor.includes('Yoga')) tipoLimpio.value = 'Yoga'
   else if (nuevoValor.includes('Spinning')) tipoLimpio.value = 'Spinning'
@@ -98,6 +108,34 @@ onMounted(() => {
 </script>
 
 <template>
+  <div id="modalEdicionContenedor" :class="{ oculto: !mostrarModal }">
+    <div id="modalEdicion">
+      <div style="display: flex; flex-direction: column; width: 100%; height: 10%">
+        <span
+          @click="cerrarModalEdicion"
+          class="material-symbols-outlined"
+          style="
+            color: #ff58339d;
+            margin-top: 2rem;
+            margin-right: 2rem;
+            align-self: flex-end;
+            font-size: 7rem;
+            cursor: pointer;
+          "
+          >close</span
+        >
+      </div>
+      <div style="display: flex; flex-direction: column; width: 100%; height: 90%">
+        <a></a>
+        <!-- Tipo actividad-->
+        <a style="color: white; font-size: 5rem; margin-left: 10rem">Hora de la actividad:</a>
+        <!-- Selector hora -->
+        <a style="color: white; font-size: 5rem; margin-left: 10rem">Fecha de la actividad:</a>
+        <!-- Selector fecha -->
+        <!-- Botón guardado -->
+      </div>
+    </div>
+  </div>
   <div class="menuLateral">
     <div class="contenedorOpcionesLateral">
       <span class="material-symbols-outlined opcionLateral" @click="router.push('/')">home</span>
@@ -135,6 +173,8 @@ onMounted(() => {
             color: white;
             margin-top: 3%;
             padding-left: 2%;
+            box-shadow: 0 0 7px 1px #ff58334e;
+            border-radius: 3rem;
           "
         >
           <option>Clases dirigidas de Crossfit</option>
@@ -161,6 +201,10 @@ onMounted(() => {
             --dp-icon-color: white;
             --dp-text-color: white;
             --dp-input-padding: 3.3rem 2rem 3rem 3rem;
+            --dp-preview-font-size: 3rem;
+            --dp-time-font-size: 4rem;
+            box-shadow: 0 0 7px 1px #ff58334e;
+            border-radius: 3rem;
           "
         >
         </VueDatePicker>
@@ -182,10 +226,13 @@ onMounted(() => {
             --dp-border-radius: 3rem;
             --dp-cell-border-radius: 0.1rem;
             --dp-font-size: 2.5rem;
+            --dp-preview-font-size: 3rem;
             --dp-cell-size: 8rem;
             --dp-icon-color: white;
             --dp-text-color: white;
             --dp-input-padding: 3.3rem 2rem 3rem 3rem;
+            box-shadow: 0 0 7px 1px #ff58334e;
+            border-radius: 3rem;
           "
         >
         </VueDatePicker>
@@ -222,6 +269,7 @@ onMounted(() => {
         :fecha="actividad.fecha"
         :hora="actividad.hora"
         @eliminar="eliminarActividad"
+        @editar="abrirModalEdicion"
       ></reserva-admin>
 
       <p v-if="actividadesFiltradas.length === 0" style="color: white; font-size: 2rem">
@@ -245,5 +293,31 @@ onMounted(() => {
   height: 15%;
   padding-left: 3%;
   column-gap: 5%;
+}
+
+#modalEdicionContenedor {
+  position: fixed;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modalEdicion {
+  height: 50%;
+  width: 50%;
+  background-color: #0e0e0e;
+  border-radius: 4rem;
+  border: solid 0.5rem #ff58339d;
+  display: flex;
+  flex-direction: column;
+}
+
+.oculto {
+  display: none;
+  visibility: hidden;
 }
 </style>

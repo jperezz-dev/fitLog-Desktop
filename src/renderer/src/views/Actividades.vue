@@ -56,7 +56,6 @@ const reservarActividad = async (idActividad) => {
     alert(response.data.message)
     obtenerActividades()
   } catch (error) {
-  
     const mensaje = error.response?.data?.message || 'Error al conectar con el servidor'
     alert(mensaje)
   }
@@ -185,6 +184,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-shadow: 0 0 10px 2px #ff58334e;
 }
 
 .actividad-activa {

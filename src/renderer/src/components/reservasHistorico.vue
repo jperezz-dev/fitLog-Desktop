@@ -1,17 +1,46 @@
 <script setup>
-
 const props = defineProps(['titulo', 'fecha', 'hora'])
 </script>
 
 <template>
   <div class="selector">
-    <a style="height: 100%; width: 10%; justify-content: center; align-items: center; display:flex; justify-content: center; text-align: center;">
+    <a
+      style="
+        height: 100%;
+        width: 10%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      "
+    >
       {{ titulo }}
     </a>
-    <a style="height: 100%; width: 10%; justify-content: center; align-items: center; display:flex; justify-content: center; text-align: center;">
+    <a
+      style="
+        height: 100%;
+        width: 10%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      "
+    >
       {{ fecha }}
     </a>
-    <a style="height: 100%; width: 10%; justify-content: center; align-items: center; display:flex; justify-content: center; text-align: center;">
+    <a
+      style="
+        height: 100%;
+        width: 10%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      "
+    >
       {{ hora }}
     </a>
   </div>
@@ -30,5 +59,6 @@ const props = defineProps(['titulo', 'fecha', 'hora'])
   font-size: 3rem;
   height: 7%;
   width: 85%;
+  box-shadow: 0 0 7px 1px #ff58334e;
 }
 </style>

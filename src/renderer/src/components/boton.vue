@@ -20,5 +20,6 @@ defineProps(['texto'])
   width: 85%;
   border: none;
   padding: 20px;
+  box-shadow: 0 0 7px 1px #ff58334e;
 }
 </style>

@@ -43,3 +43,27 @@ Lanza la aplicación en modo desarrollo:
 `npm run dev`
 
 ## Imagenes en ejecución:
+
+### Ventana de login
+<img width="1911" height="1078" alt="{83ABDE44-AF65-43F9-B1D6-A6DD32ACDADB}" src="https://github.com/user-attachments/assets/af4f0032-e8f9-4eb5-878e-1bc1fd6ddc29" />
+
+### Ventana de registro
+<img width="1909" height="1075" alt="{0A84FAE7-FB19-44E9-9E91-26C33EC292D2}" src="https://github.com/user-attachments/assets/07b9fc24-7396-408b-8623-8e0a65a19260" />
+
+### Ventana de inicio
+<img width="1909" height="1073" alt="{59CDF58F-4676-4D22-ABE0-9DFAB62BD518}" src="https://github.com/user-attachments/assets/4c4c59c0-f74e-463f-90c8-a13fa06741a1" />
+
+### Ventana de actividades
+<img width="1911" height="1074" alt="{9A7FD40F-0B6E-40E4-9F38-0FA79FFCC67C}" src="https://github.com/user-attachments/assets/dad83cad-3de4-413f-a087-af497b342e03" />
+
+### Ventana de reservas
+<img width="1907" height="1071" alt="{6C9CB9B4-F8B0-4650-937A-A2309730B955}" src="https://github.com/user-attachments/assets/8768a60f-8b54-4604-9f05-a12eff0638be" />
+
+### Ventana de perfil
+<img width="1902" height="1071" alt="{FCA71622-0275-46A6-9CC8-5CA47601047F}" src="https://github.com/user-attachments/assets/fa089a08-f9de-404f-8ca9-7e49786aa593" />
+
+### Ventana de admin
+<img width="1906" height="1077" alt="{8A2831E0-6933-4A98-81E4-F09EE97445B8}" src="https://github.com/user-attachments/assets/22a210a9-7f65-4bec-8339-5034c8bc557f" />
+
+### Edición de actividad
+<img width="1906" height="1075" alt="{14FE6B2D-E304-4468-A0F6-90871F139164}" src="https://github.com/user-attachments/assets/5bce1556-d668-4e13-aefb-ec5071b7195c" />

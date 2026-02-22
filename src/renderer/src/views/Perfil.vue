@@ -4,11 +4,13 @@ import api from '../services/axios'
 import reservasHistorico from '@renderer/components/reservasHistorico.vue'
 import { ref, computed, onMounted, watch } from 'vue'
 import { useUserStore } from '@renderer/services/usser_session'
+import Boton from '@renderer/components/boton.vue'
 
 const router = useRouter()
 const actividadSeleccionada = ref('Spinning')
 const actividades = ref([])
 const userStore = useUserStore()
+const esAdmin = userStore.admministrador
 
 // Lista de actividades filtradas
 const actividadesFiltradas = computed(() => {
@@ -40,6 +42,12 @@ const obtenerHistorial = async () => {
   }
 }
 
+// Const cerrar sesion
+const cerrarSesion = () => {
+userStore.logout
+router.push('/');
+}
+
 watch(actividadSeleccionada, () => {
   obtenerHistorial()
 })
@@ -52,7 +60,9 @@ onMounted(() => {
 <template>
   <div class="menuLateral">
     <div class="contenedorOpcionesLateral">
-      <span class="material-symbols-outlined opcionLateral" @click="router.push('/inicio')">home</span>
+      <span class="material-symbols-outlined opcionLateral" @click="router.push('/inicio')"
+        >home</span
+      >
       <span class="material-symbols-outlined opcionLateral" @click="router.push('/actividades')"
         >backup_table</span
       >
@@ -64,14 +74,21 @@ onMounted(() => {
       <span style="color: #ff5733" class="material-symbols-outlined opcionLateral"
         >account_circle</span
       >
-      <span class="material-symbols-outlined opcionLateral" @click="router.push('/admin')"
+      <span
+        class="material-symbols-outlined opcionLateral"
+        :class="{ oculto: esAdmin == false }"
+        @click="router.push('/admin')"
         >admin_panel_settings</span
       >
     </div>
   </div>
   <div class="contenedorPrincipal">
-    <div style="display: flex; flex-direction: row; padding-left: 3%">
+    <div style="display: flex; flex-direction: row; padding-left: 3%; justify-content: space-between;">
       <a style="color: white; font-size: 5.5rem">Mi Perfil</a>
+      <boton
+        style="font-size: 3rem; height: 90%; padding: 0px; width: 10%; margin-right: 10rem;"
+        texto="Cerrar sesión" @click="cerrarSesion"
+      ></boton>
     </div>
     <div id="contenedorDatosUsuario">
       <div
@@ -134,5 +151,10 @@ onMounted(() => {
   padding-left: 3%;
   height: 15%;
   row-gap: 35%;
+}
+
+.oculto {
+  visibility: hidden;
+  display: none;
 }
 </style>

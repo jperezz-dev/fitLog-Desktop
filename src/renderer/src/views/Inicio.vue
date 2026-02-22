@@ -11,6 +11,7 @@ import imgYoga from '../assets/imagen-yoga.png'
 
 const router = useRouter()
 const userStore = useUserStore()
+const esAdmin = userStore.admministrador
 </script>
 
 <template>
@@ -28,7 +29,7 @@ const userStore = useUserStore()
       <span class="material-symbols-outlined opcionLateral" @click="router.push('/perfil')"
         >account_circle</span
       >
-      <span class="material-symbols-outlined opcionLateral" @click="router.push('/admin')"
+      <span class="material-symbols-outlined opcionLateral" :class="{ 'oculto': esAdmin == false }" @click="router.push('/admin')"
         >admin_panel_settings</span
       >
     </div>
@@ -142,5 +143,10 @@ const userStore = useUserStore()
   height: 55%;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.oculto {
+  visibility: hidden;
+  display: none;
 }
 </style>

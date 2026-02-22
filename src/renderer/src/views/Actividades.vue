@@ -9,6 +9,7 @@ const router = useRouter()
 const actividadSeleccionada = ref('Spinning')
 const actividades = ref([])
 const userStore = useUserStore()
+const esAdmin = userStore.admministrador
 
 // Lista de actividades filtradas
 const actividadesFiltradas = computed(() => {
@@ -87,7 +88,7 @@ onMounted(() => {
       <span class="material-symbols-outlined opcionLateral" @click="router.push('/perfil')"
         >account_circle</span
       >
-      <span class="material-symbols-outlined opcionLateral" @click="router.push('/admin')"
+      <span class="material-symbols-outlined opcionLateral" :class="{ 'oculto': esAdmin == false }" @click="router.push('/admin')"
         >admin_panel_settings</span
       >
     </div>
@@ -216,5 +217,10 @@ onMounted(() => {
 
 #crossfit {
   background-image: url(../assets/icono-crossfit.svg);
+}
+
+.oculto {
+  visibility: hidden;
+  display: none;
 }
 </style>

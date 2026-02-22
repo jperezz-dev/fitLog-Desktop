@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: nombre-de-tu-app
+productName: FitLog
 directories:
   buildResources: build
 files:
@@ -12,7 +12,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: nombre-de-tu-app
+  executableName: FitLog
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}

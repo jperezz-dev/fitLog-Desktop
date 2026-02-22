@@ -1,9 +1,9 @@
 {
-  "name": "nombre-de-tu-app",
+  "name": "FitLog",
   "version": "1.0.0",
-  "description": "An Electron application with Vue and TypeScript",
+  "description": "Aplicación de escritorio de FitLog",
   "main": "./out/main/index.js",
-  "author": "example.com",
+  "author": "jperezz-dev",
   "homepage": "https://electron-vite.org",
   "scripts": {
     "format": "prettier --write .",
